@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSS Animation 背景颜色变化</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			min-height: 100vh;
+			margin: 0;
+			padding: 48px 24px;
+			display: grid;
+			place-items: center;
+			background-color: #f4f2ec;
+			background-image: linear-gradient(#dedbd3 1px, transparent 1px), linear-gradient(90deg, #dedbd3 1px, transparent 1px);
+			background-size: 36px 36px;
+			color: #202b28;
+			font-family: "Microsoft YaHei", sans-serif;
+		}
+
+		.showcase {
+			width: min(1000px, 100%);
+			display: grid;
+			grid-template-columns: 0.85fr 1.15fr;
+			align-items: center;
+			gap: 64px;
+		}
+
+		.eyebrow,
+		.box-kicker,
+		.stage-note,
+		.stage-index {
+			font-family: Georgia, "Microsoft YaHei", serif;
+			letter-spacing: 1px;
+		}
+
+		.eyebrow {
+			margin: 0 0 20px;
+			color: #b64b3d;
+			font-size: 13px;
+			font-weight: bold;
+		}
+
+		h1 {
+			margin: 0;
+			font-family: Georgia, "Microsoft YaHei", serif;
+			font-size: 54px;
+			font-weight: 500;
+			line-height: 1.15;
+		}
+
+		.description {
+			max-width: 340px;
+			margin: 22px 0 30px;
+			color: #64716c;
+			font-size: 15px;
+			line-height: 1.9;
+		}
+
+		.palette {
+			display: flex;
+			gap: 18px;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.palette li {
+			display: grid;
+			justify-items: center;
+			gap: 8px;
+			color: #64716c;
+			font-size: 11px;
+		}
+
+		.swatch {
+			width: 24px;
+			aspect-ratio: 1;
+			border: 2px solid #fff;
+			border-radius: 50%;
+			box-shadow: 0 1px 4px #202b2826;
+		}
+
+		.swatch-coral { background: #e85d4a; }
+		.swatch-gold { background: #e9ad3c; }
+		.swatch-green { background: #298b73; }
+		.swatch-blue { background: #367da0; }
+
+		.stage {
+			position: relative;
+			min-height: 470px;
+			display: grid;
+			place-items: center;
+			overflow: hidden;
+			border: 1px solid #d8d4ca;
+			border-radius: 4px;
+			background: #e9e6de;
+		}
+
+		.stage-note,
+		.stage-index {
+			position: absolute;
+			z-index: 1;
+			color: #64716c;
+			font-size: 11px;
+		}
+
+		.stage-note {
+			top: 22px;
+			left: 24px;
+		}
+
+		.stage-index {
+			right: 24px;
+			bottom: 22px;
+		}
+
+		.color-box {
+			position: relative;
+			width: min(270px, 68vw);
+			aspect-ratio: 1;
+			display: grid;
+			place-items: center;
+			color: #fff;
+			animation: color-motion 8s ease-in-out infinite;
+		}
+
+		.color-box::before {
+			position: absolute;
+			inset: 15px;
+			border: 1px solid #ffffff9c;
+			border-radius: inherit;
+			content: "";
+			animation: frame-motion 8s ease-in-out infinite;
+		}
+
+		.box-content {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+		}
+
+		.box-kicker {
+			display: block;
+			margin-bottom: 14px;
+			font-size: 10px;
+		}
+
+		.box-title {
+			display: block;
+			font-family: Georgia, "Microsoft YaHei", serif;
+			font-size: 34px;
+			font-weight: 500;
+			line-height: 1.05;
+		}
+
+		.box-caption {
+			display: block;
+			margin-top: 14px;
+			font-size: 12px;
+		}
+
+		@keyframes color-motion {
+			0%, 100% {
+				border-radius: 28% 72% 62% 38% / 38% 38% 62% 62%;
+				background-color: #e85d4a;
+				box-shadow: 0 28px 60px #a9443540;
+				transform: translateY(0) rotate(-4deg) scale(1);
+			}
+			25% {
+				border-radius: 42% 58% 36% 64% / 50% 34% 66% 50%;
+				background-color: #e9ad3c;
+				box-shadow: 0 34px 66px #a77a2d40;
+				transform: translateY(-10px) rotate(3deg) scale(1.03);
+			}
+			50% {
+				border-radius: 62% 38% 55% 45% / 38% 57% 43% 62%;
+				background-color: #298b73;
+				box-shadow: 0 28px 60px #226c5b40;
+				transform: translateY(0) rotate(-3deg) scale(1);
+			}
+			75% {
+				border-radius: 38% 62% 42% 58% / 58% 40% 60% 42%;
+				background-color: #367da0;
+				box-shadow: 0 34px 66px #285c7740;
+				transform: translateY(-10px) rotate(4deg) scale(1.03);
+			}
+		}
+
+		@keyframes frame-motion {
+			0%, 100% { transform: rotate(4deg) scale(0.94); }
+			50% { transform: rotate(-5deg) scale(1.04); }
+		}
+
+		@media (max-width: 700px) {
+			body {
+				padding: 36px 20px;
+			}
+
+			.showcase {
+				grid-template-columns: 1fr;
+				gap: 32px;
+			}
+
+			h1 {
+				font-size: 42px;
+			}
+
+			.description {
+				margin: 16px 0 22px;
+			}
+
+			.stage {
+				min-height: 390px;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.color-box,
+			.color-box::before {
+				animation: none;
+			}
+
+			.color-box {
+				border-radius: 28% 72% 62% 38% / 38% 38% 62% 62%;
+				background-color: #e85d4a;
+				box-shadow: 0 28px 60px #a9443540;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="showcase">
+		<section class="intro">
+			<p class="eyebrow">CSS MOTION / 01</p>
+			<h1>让颜色，<br>开始流动。</h1>
+			<p class="description">一个盒子，四种色彩。背景、形状与光影在 CSS animation 中连续变化。</p>
+			<ul class="palette" aria-label="动画中的四种颜色">
+				<li><span class="swatch swatch-coral"></span>珊瑚</li>
+				<li><span class="swatch swatch-gold"></span>暖金</li>
+				<li><span class="swatch swatch-green"></span>青绿</li>
+				<li><span class="swatch swatch-blue"></span>湖蓝</li>
+			</ul>
+		</section>
+		<section class="stage" aria-label="四种颜色循环变化的动画展示">
+			<span class="stage-note">INFINITE LOOP · 8 SEC</span>
+			<div class="color-box">
+				<div class="box-content">
+					<span class="box-kicker">COLOR STUDY · 01</span>
+					<strong class="box-title">Color<br>in Motion</strong>
+					<span class="box-caption">四种颜色 · 无限循环</span>
+				</div>
+			</div>
+			<span class="stage-index">01 — 04</span>
+		</section>
+	</main>
+</body>
+</html>

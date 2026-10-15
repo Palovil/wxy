@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王欣怡 · 媒体查询布局</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f1f2eb;
+            background-image: linear-gradient(rgba(33, 54, 58, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(33, 54, 58, 0.035) 1px, transparent 1px);
+            background-size: 2rem 2rem;
+            color: #21363a;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        main {
+            width: min(72rem, calc(100% - 3rem));
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(33, 54, 58, 0.22);
+        }
+
+        h1 {
+            margin: 0;
+            font-family: Georgia, "Microsoft YaHei", serif;
+            font-size: 3.5rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .heading-mark {
+            width: 3rem;
+            height: 0.25rem;
+            margin-top: 1.25rem;
+            background: #e36b50;
+        }
+
+        .box-grid {
+            display: grid;
+            grid-template-columns: repeat(8, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .box {
+            position: relative;
+            display: grid;
+            aspect-ratio: 1;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: var(--box-color);
+            color: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(33, 54, 58, 0.12);
+            isolation: isolate;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .box:nth-child(1) { --box-color: #e36b50; }
+        .box:nth-child(2) { --box-color: #197c75; }
+        .box:nth-child(3) { --box-color: #477f9c; }
+        .box:nth-child(4) { --box-color: #d3a23f; }
+        .box:nth-child(5) { --box-color: #304f5a; }
+        .box:nth-child(6) { --box-color: #bd664d; }
+        .box:nth-child(7) { --box-color: #62845c; }
+        .box:nth-child(8) { --box-color: #83744d; }
+
+        .box::before {
+            position: absolute;
+            z-index: -1;
+            width: 68%;
+            aspect-ratio: 1;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 50%;
+            box-shadow: 0 0 0 1.25rem rgba(255, 255, 255, 0.08), 0 0 0 2.5rem rgba(255, 255, 255, 0.06);
+            content: "";
+            transform: translate(18%, -12%);
+            transition: transform 250ms ease;
+        }
+
+        .box::after {
+            position: absolute;
+            z-index: -1;
+            width: 1px;
+            height: 140%;
+            background: rgba(255, 255, 255, 0.18);
+            content: "";
+            transform: rotate(42deg);
+        }
+
+        .box-number {
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            line-height: 1;
+            text-shadow: 0 2px 12px rgba(20, 30, 30, 0.18);
+        }
+
+        .box:hover {
+            z-index: 1;
+            box-shadow: 0 1rem 1.75rem rgba(33, 54, 58, 0.2);
+            transform: translateY(-0.25rem);
+        }
+
+        .box:hover::before {
+            transform: translate(12%, -8%) scale(1.1);
+        }
+
+        @media (max-width: 64rem) {
+            .box-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 48rem) {
+            main {
+                width: calc(100% - 2rem);
+                padding: 3rem 0;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .box-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 30rem) {
+            main {
+                width: calc(100% - 1.5rem);
+                padding: 2rem 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .box-grid {
+                grid-template-columns: 1fr;
+                gap: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <div>
+                <h1>王欣怡</h1>
+                <div class="heading-mark" aria-hidden="true"></div>
+            </div>
+        </header>
+        <section class="box-grid" aria-label="八个响应式盒子">
+            <div class="box"><span class="box-number">01</span></div>
+            <div class="box"><span class="box-number">02</span></div>
+            <div class="box"><span class="box-number">03</span></div>
+            <div class="box"><span class="box-number">04</span></div>
+            <div class="box"><span class="box-number">05</span></div>
+            <div class="box"><span class="box-number">06</span></div>
+            <div class="box"><span class="box-number">07</span></div>
+            <div class="box"><span class="box-number">08</span></div>
+        </section>
+    </main>
+</body>
+</html>

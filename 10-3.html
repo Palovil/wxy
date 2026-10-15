@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视口变化与媒体查询</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        .viewport-box {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            padding: 3rem;
+            background-color: #c6533e;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.08) 0.0625rem, transparent 0.0625rem), linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0.0625rem, transparent 0.0625rem);
+            background-size: 2.25rem 2.25rem;
+            color: #fff;
+            transition: background-color 0.55s ease;
+        }
+
+        .viewport-box::before {
+            position: absolute;
+            inset: 1.5rem;
+            border: 0.0625rem solid rgba(255, 255, 255, 0.48);
+            content: "";
+            pointer-events: none;
+        }
+
+        .name {
+            position: relative;
+            margin: 0;
+            font-family: Georgia, "Microsoft YaHei", serif;
+            font-size: 8rem;
+            font-weight: 500;
+            line-height: 1.1;
+            text-shadow: 0 0.5rem 1.5rem rgba(36, 26, 20, 0.2);
+            transition: font-size 0.35s ease;
+        }
+
+        .name::after {
+            display: block;
+            width: 4rem;
+            height: 0.2rem;
+            margin: 1.5rem auto 0;
+            background: rgba(255, 255, 255, 0.78);
+            content: "";
+        }
+
+        @media (max-width: 72rem) {
+            .viewport-box {
+                background-color: #23836f;
+            }
+
+            .name {
+                font-size: 6rem;
+            }
+        }
+
+        @media (max-width: 42rem) {
+            .viewport-box {
+                padding: 1.5rem;
+                background-color: #3479a0;
+                background-size: 1.75rem 1.75rem;
+            }
+
+            .viewport-box::before {
+                inset: 0.75rem;
+            }
+
+            .name {
+                font-size: 4rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .viewport-box,
+            .name {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="viewport-box">
+        <h1 class="name">王欣怡</h1>
+    </main>
+</body>
+</html>
