@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13-1 Font Awesome 字体图标</title>
+    <link rel="stylesheet" href="cdn/fa.min.css">
+    <style>
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        .wang_container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .wang_header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .wang_header h1 {
+            color: #1a1a2e;
+            font-size: 2em;
+            margin: 0 0 8px;
+        }
+        .wang_header p {
+            color: #666;
+            font-size: 0.95em;
+        }
+        .wang_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 20px;
+        }
+        .wang_card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .wang_card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,.12);
+        }
+        .wang_card i {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .wang_card p {
+            margin: 0;
+            color: #444;
+            font-size: 0.9em;
+        }
+        .wang_section-title {
+            grid-column: 1 / -1;
+            font-size: 1.1em;
+            color: #333;
+            margin-top: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e25555;
+        }
+        .c-red { color: #e25555; }
+        .c-blue { color: #3b82f6; }
+        .c-green { color: #10b981; }
+        .c-orange { color: #f59e0b; }
+        .c-purple { color: #8b5cf6; }
+        .c-teal { color: #14b8a6; }
+    </style>
+</head>
+<body>
+    <div class="wang_container">
+        <div class="wang_header">
+            <h1>Font Awesome 字体图标</h1>
+            <p>通过 @font-face 加载字体文件，使用 CSS 类名渲染图标</p>
+        </div>
+        <div class="wang-grid">
+            <div class="wang_section-title">Solid 实心图标</div>
+            <div class="wang_card"><i class="fa-solid fa-house c-red"></i><p>首页</p></div>
+            <div class="wang_card"><i class="fa-solid fa-user c-blue"></i><p>用户</p></div>
+            <div class="wang_card"><i class="fa-solid fa-heart c-red"></i><p>收藏</p></div>
+            <div class="wang_card"><i class="fa-solid fa-star c-orange"></i><p>星标</p></div>
+            <div class="wang_card"><i class="fa-solid fa-gear c-purple"></i><p>设置</p></div>
+            <div class="wang_card"><i class="fa-solid fa-magnifying-glass c-teal"></i><p>搜索</p></div>
+            <div class="wang_card"><i class="fa-solid fa-envelope c-blue"></i><p>邮件</p></div>
+            <div class="wang_card"><i class="fa-solid fa-camera c-green"></i><p>相机</p></div>
+            <div class="wang_card"><i class="fa-solid fa-music c-purple"></i><p>音乐</p></div>
+            <div class="wang_card"><i class="fa-solid fa-cart-shopping c-orange"></i><p>购物车</p></div>
+            <div class="wang_card"><i class="fa-solid fa-cloud c-blue"></i><p>云存储</p></div>
+            <div class="wang_card"><i class="fa-solid fa-thumbs-up c-green"></i><p>点赞</p></div>
+            <div class="wang_card"><i class="fa-solid fa-bell c-orange"></i><p>通知</p></div>
+            <div class="wang_card"><i class="fa-solid fa-bookmark c-teal"></i><p>书签</p></div>
+            <div class="wang_card"><i class="fa-solid fa-folder c-blue"></i><p>文件夹</p></div>
+            <div class="wang_card"><i class="fa-solid fa-flag c-red"></i><p>标记</p></div>
+            <div class="wang_card"><i class="fa-solid fa-location-dot c-green"></i><p>位置</p></div>
+            <div class="wang_card"><i class="fa-solid fa-shield-halved c-purple"></i><p>安全</p></div>
+            <div class="wang_section-title">Regular 线性图标</div>
+            <div class="wang_card"><i class="fa-regular fa-user c-blue"></i><p>用户</p></div>
+            <div class="wang_card"><i class="fa-regular fa-heart c-red"></i><p>收藏</p></div>
+            <div class="wang_card"><i class="fa-regular fa-star c-orange"></i><p>星标</p></div>
+            <div class="wang_card"><i class="fa-regular fa-bell c-orange"></i><p>通知</p></div>
+            <div class="wang_card"><i class="fa-regular fa-folder c-blue"></i><p>文件夹</p></div>
+            <div class="wang_section-title">Brands 品牌图标</div>
+            <div class="wang_card"><i class="fa-brands fa-github"></i><p>GitHub</p></div>
+            <div class="wang_card"><i class="fa-brands fa-weixin c-green"></i><p>微信</p></div>
+            <div class="wang_card"><i class="fa-brands fa-weibo c-red"></i><p>微博</p></div>
+            <div class="wang_card"><i class="fa-brands fa-qq c-blue"></i><p>QQ</p></div>
+            <div class="wang_card"><i class="fa-brands fa-alipay c-blue"></i><p>支付宝</p></div>
+            <div class="wang_card"><i class="fa-brands fa-android c-green"></i><p>安卓</p></div>
+            <div class="wang_card"><i class="fa-brands fa-apple"></i><p>苹果</p></div>
+            <div class="wang_card"><i class="fa-brands fa-chrome c-orange"></i><p>浏览器</p></div>
+        </div>
+    </div>
+</body>
+</html>

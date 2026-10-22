@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13-3 移动端底部导航 - 字体图标</title>
+    <style>
+        @font-face {
+            font-family: "iconfont";
+            src: url('cdn/iconfont.woff2') format('woff2'),
+                 url('cdn/iconfont.ttf') format('truetype');
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .wang_content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 16px;
+        }
+        .wang_tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            background: #fff;
+            border-top: 1px solid #e5e5e5;
+            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 100;
+        }
+        .wang_tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 0 6px;
+            color: #999;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .wang_tab-item.active {
+            color: #ff6600;
+        }
+        .wang_tab-item .wang_iconfont {
+            font-family: "iconfont" !important;
+            font-size: 24px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            display: inline-block;
+        }
+        .wang_tab-item .wang_label {
+            font-size: 10px;
+            margin-top: 4px;
+            line-height: 1;
+        }
+        .wang_badge {
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            margin-left: 2px;
+            min-width: 16px;
+            height: 16px;
+            background: #ff3b30;
+            border-radius: 8px;
+            font-size: 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            font-style: normal;
+            line-height: 1;
+        }
+        .wang_dot {
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            margin-left: 4px;
+            width: 8px;
+            height: 8px;
+            background: #ff3b30;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wang_content">页面内容区域</div>
+    <nav class="wang_tabbar">
+        <a class="wang_tab-item active" href="#">
+            <span class="wang_iconfont icon-shouye"></span>
+            <span class="wang_label">首页</span>
+        </a>
+        <a class="wang_tab-item" href="#">
+            <span class="wang_iconfont icon-dianying"></span>
+            <span class="wang_label">电影</span>
+            <i class="wang_badge">3</i>
+        </a>
+        <a class="wang_tab-item" href="#">
+            <span class="wang_iconfont icon-yanchanghui"></span>
+            <span class="wang_label">演唱会</span>
+            <i class="wang_dot"></i>
+        </a>
+        <a class="wang_tab-item" href="#">
+            <span class="wang_iconfont icon-wanle"></span>
+            <span class="wang_label">玩乐</span>
+            <i class="wang_badge">12</i>
+        </a>
+        <a class="wang_tab-item" href="#">
+            <span class="wang_iconfont icon-my"></span>
+            <span class="wang_label">我的</span>
+            <i class="wang_dot"></i>
+        </a>
+    </nav>
+    <style>
+        .icon-shouye::before { content: "\e600"; }
+        .icon-dianying::before { content: "\e8ae"; }
+        .icon-yanchanghui::before { content: "\e640"; }
+        .icon-wanle::before { content: "\e607"; }
+        .icon-my::before { content: "\e78b"; }
+    </style>
+</body>
+</html>
