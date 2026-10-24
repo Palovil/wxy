@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        姓名：王欣怡
+        日期：2026-10-22
+        功能名称：JavaScript 6种基本数据类型演示
+    -->
+    <title>王欣怡的JavaScript - 6种基本数据类型</title>
+    <link rel="stylesheet" href="font/iconfont.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --wxy_primary: #6366f1;
+            --wxy_primary-dark: #4f46e5;
+            --wxy_accent: #f59e0b;
+            --wxy_success: #10b981;
+            --wxy_warning: #ef4444;
+            --wxy_info: #06b6d4;
+            --wxy_purple: #8b5cf6;
+            --wxy_pink: #ec4899;
+            --wxy_bg: #0f172a;
+            --wxy_card: #1e293b;
+            --wxy_card-light: #f8fafc;
+            --wxy_text: #e2e8f0;
+            --wxy_text-muted: #94a3b8;
+            --wxy_border: #334155;
+        }
+        body {
+            font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--wxy_bg);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--wxy_text);
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(99,102,241,0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139,92,246,0.12), transparent 40%),
+                radial-gradient(circle at 50% 100%, rgba(6,182,212,0.08), transparent 50%);
+            pointer-events: none;
+        }
+
+        /* ===== Hero Header ===== */
+        .wxy_hero {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px;
+            border: 1px solid var(--wxy_border);
+            position: relative;
+            overflow: hidden;
+        }
+        .wxy_hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
+            border-radius: 50%;
+            animation: wxy_float 8s ease-in-out infinite;
+        }
+        @keyframes wxy_float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 20px); }
+        }
+        .wxy_hero_badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99,102,241,0.15);
+            border: 1px solid rgba(99,102,241,0.3);
+            color: var(--wxy_primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+        .wxy_hero h1 {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f0abfc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .wxy_hero p {
+            color: var(--wxy_text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+        .wxy_hero_meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .wxy_meta_item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--wxy_text-muted);
+            font-size: 13px;
+        }
+        .wxy_meta_item .iconfont {
+            font-size: 16px;
+            color: var(--wxy_primary);
+        }
+
+        /* ===== Stats Bar ===== */
+        .wxy_stats {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .wxy_stat_card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--wxy_border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .wxy_stat_card:hover {
+            transform: translateY(-4px);
+            border-color: var(--wxy_primary);
+        }
+        .wxy_stat_num {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--wxy_primary);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .wxy_stat_label {
+            color: var(--wxy_text-muted);
+            font-size: 13px;
+            margin-top: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== Filter Tabs ===== */
+        .wxy_tabs {
+            max-width: 1100px;
+            margin: 0 auto 24px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .wxy_tab {
+            padding: 8px 18px;
+            background: var(--wxy_card);
+            border: 1px solid var(--wxy_border);
+            border-radius: 50px;
+            color: var(--wxy_text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .wxy_tab:hover {
+            color: var(--wxy_text);
+            border-color: var(--wxy_primary);
+        }
+        .wxy_tab.wxy_active {
+            background: var(--wxy_primary);
+            color: #fff;
+            border-color: var(--wxy-primary);
+        }
+
+        /* ===== Type Cards ===== */
+        .wxy_container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .wxy_grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .wxy_type_card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--wxy_border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .wxy_type_card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--wxy_card_color, var(--wxy_primary));
+        }
+        .wxy_type_card::after {
+            content: "";
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, var(--wxy_card_color, var(--wxy_primary)), transparent 70%);
+            opacity: 0.08;
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+        }
+        .wxy_type_card:hover {
+            transform: translateY(-6px);
+            border-color: var(--wxy_card_color, var(--wxy_primary));
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+        .wxy_type_card:hover::after {
+            opacity: 0.2;
+        }
+        .wxy_card_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            gap: 12px;
+        }
+        .wxy_type_info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .wxy_type_icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--wxy_card_color, var(--wxy_primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #fff;
+            font-family: Georgia, serif;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .wxy_type_name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--wxy_text);
+        }
+        .wxy_type_cn {
+            font-size: 12px;
+            color: var(--wxy_text-muted);
+            margin-top: 2px;
+        }
+        .wxy_type_badge {
+            background: rgba(99,102,241,0.15);
+            color: var(--wxy_card_color, var(--wxy_primary));
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: "Consolas", monospace;
+            font-weight: 600;
+            border: 1px solid currentColor;
+        }
+        .wxy_type_desc {
+            color: var(--wxy_text-muted);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .wxy_demo_box {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 12.5px;
+            color: #7ee787;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            position: relative;
+        }
+        .wxy_demo_box::before {
+            content: "● ● ●";
+            color: #21262d;
+            font-size: 10px;
+            position: absolute;
+            top: 6px;
+            right: 12px;
+            letter-spacing: 2px;
+        }
+        .wxy_output {
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.2);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--wxy_text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .wxy_output .iconfont {
+            color: var(--wxy_success);
+            font-size: 16px;
+        }
+        .wxy_output strong {
+            color: var(--wxy_success);
+            font-weight: 600;
+        }
+
+        /* ===== Console Section ===== */
+        .wxy_console_section {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            background: #0d1117;
+            border: 1px solid var(--wxy_border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .wxy_console_header {
+            background: #161b22;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--wxy_border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .wxy_console_title {
+            color: var(--wxy_text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .wxy_console_title .iconfont {
+            color: var(--wxy_info);
+        }
+        .wxy_console_dots {
+            display: flex;
+            gap: 6px;
+        }
+        .wxy_console_dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .wxy_console_body {
+            padding: 16px 20px;
+            font-family: "Consolas", monospace;
+            font-size: 13px;
+            color: var(--wxy_text);
+            line-height: 1.8;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+        .wxy_console_line {
+            display: flex;
+            gap: 12px;
+            padding: 2px 0;
+        }
+        .wxy_console_arrow {
+            color: var(--wxy_text-muted);
+        }
+        .wxy_console_key {
+            color: #79c0ff;
+            font-weight: 600;
+        }
+        .wxy_console_val {
+            color: #a5d6ff;
+        }
+        .wxy_console_typeof {
+            color: var(--wxy_accent);
+            font-style: italic;
+        }
+
+        /* ===== Footer ===== */
+        .wxy_footer {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            text-align: center;
+            padding: 24px;
+            color: var(--wxy_text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--wxy_border);
+        }
+        .wxy_footer .iconfont {
+            color: var(--wxy_warning);
+            margin: 0 4px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .wxy_hero { padding: 32px 20px; }
+            .wxy_stats { grid-template-columns: 1fr; }
+            .wxy_grid { grid-template-columns: 1fr; }
+            .wxy_console_body { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Hero ===== -->
+    <div class="wxy_hero">
+        <div class="wxy_hero_badge">
+            <span class="iconfont icon-doubao1"></span>
+            JavaScript 数据类型
+        </div>
+        <h1>6种基本数据类型</h1>
+        <p>JavaScript 中共有六种基本数据类型，它们是构建程序的基础。每种类型都有独特的用途和特征，理解它们是掌握 JavaScript 的第一步。</p>
+        <div class="wxy_hero_meta">
+            <span class="wxy_meta_item"><span class="iconfont icon-my"></span> 姓名：王欣怡</span>
+            <span class="wxy_meta_item"><span class="iconfont icon-shoucang"></span> 日期：2026-10-22</span>
+            <span class="wxy_meta_item"><span class="iconfont icon-bianji"></span> 14-2 数据类型演示</span>
+        </div>
+    </div>
+
+    <!-- ===== Stats ===== -->
+    <div class="wxy_stats">
+        <div class="wxy_stat_card">
+            <div class="wxy_stat_num">6</div>
+            <div class="wxy_stat_label">基本数据类型</div>
+        </div>
+        <div class="wxy_stat_card">
+            <div class="wxy_stat_num">ES6</div>
+            <div class="wxy_stat_label">Symbol 新增</div>
+        </div>
+        <div class="wxy_stat_card">
+            <div class="wxy_stat_num">typeof</div>
+            <div class="wxy_stat_label">类型检测运算符</div>
+        </div>
+    </div>
+
+    <!-- ===== Filter Tabs ===== -->
+    <div class="wxy_tabs">
+        <div class="wxy_tab wxy_active" onclick="wxy_filterType('all')">全部</div>
+        <div class="wxy_tab" onclick="wxy_filterType('primitive')">原始类型</div>
+        <div class="wxy_tab" onclick="wxy_filterType('special')">特殊类型</div>
+        <div class="wxy_tab" onclick="wxy_filterType('es6')">ES6新增</div>
+    </div>
+
+    <!-- ===== Type Cards ===== -->
+    <div class="wxy_container">
+        <div class="wxy_grid" id="wxy_content">
+            <!-- 动态生成 -->
+        </div>
+    </div>
+
+    <!-- ===== Console Output ===== -->
+    <div class="wxy_console_section">
+        <div class="wxy_console_header">
+            <div class="wxy_console_title">
+                <span class="iconfont icon-sousuo_o"></span>
+                Console 输出验证 (F12 查看)
+            </div>
+            <div class="wxy_console_dots">
+                <span style="background:#ff5f56;"></span>
+                <span style="background:#ffbd2e;"></span>
+                <span style="background:#27c93f;"></span>
+            </div>
+        </div>
+        <div class="wxy_console_body" id="wxy_console_body">
+            <!-- 动态生成 -->
+        </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <div class="wxy_footer">
+        <span class="iconfont icon-shoucang"></span>
+        王欣怡的高级网页设计作业 | 14-2 数据类型演示
+        <span class="iconfont icon-shoucang"></span>
+    </div>
+
+    <script>
+        // 姓名：王欣怡
+        // 日期：2026-10-22
+        // 功能名称：JavaScript 6种基本数据类型演示
+
+        // ========== 6种基本数据类型 ==========
+        var wxy_num = 42;
+        var wxy_str = "王欣怡";
+        var wxy_bool = true;
+        var wxy_undef;
+        var wxy_null = null;
+        var wxy_sym = Symbol("wxy_id");
+
+        // 数据类型配置
+        var wxy_typeList = [
+            {
+                name: "Number",
+                cnName: "数字型",
+                category: "primitive",
+                color: "#6366f1",
+                icon: "#",
+                desc: "用于表示整数和小数。JavaScript中所有数字都以64位浮点格式存储，不区分整数和浮点数。",
+                code: "var wxy_num1 = 42;\nvar wxy_num2 = 3.14;\nvar wxy_num3 = -7;\nvar wxy_num4 = 1e5;",
+                value: "wxy_num1 = " + 42 + " | wxy_num2 = " + 3.14,
+                typeofVal: "number"
+            },
+            {
+                name: "String",
+                cnName: "字符串型",
+                category: "primitive",
+                color: "#10b981",
+                icon: "S",
+                desc: "用于表示文本数据，可用单引号、双引号或反引号（模板字符串）包裹。",
+                code: 'var wxy_name = "王欣怡";\nvar wxy_greet = \'Hello\';\nvar wxy_tpl = `你好, ${wxy_name}`;',
+                value: "wxy_name = 王欣怡 | 模板字符串：你好, 王欣怡",
+                typeofVal: "string"
+            },
+            {
+                name: "Boolean",
+                cnName: "布尔型",
+                category: "primitive",
+                color: "#f59e0b",
+                icon: "B",
+                desc: "只有 true 和 false 两个值，常用于条件判断和逻辑运算。",
+                code: "var wxy_isStudent = true;\nvar wxy_isAdmin = false;\nvar wxy_canVote = 18 >= 18;",
+                value: "wxy_isStudent = true | wxy_canVote = " + (18 >= 18),
+                typeofVal: "boolean"
+            },
+            {
+                name: "Undefined",
+                cnName: "未定义型",
+                category: "special",
+                color: "#06b6d4",
+                icon: "U",
+                desc: "表示变量已声明但未赋值。是变量的默认初始值。",
+                code: "var wxy_undef;\nconsole.log(wxy_undef); // undefined",
+                value: "wxy_undef = " + wxy_undef,
+                typeofVal: "undefined"
+            },
+            {
+                name: "Null",
+                cnName: "空值型",
+                category: "special",
+                color: "#ef4444",
+                icon: "N",
+                desc: '表示"无值"或"空"，需显式赋值。typeof null 返回 object（历史遗留问题）。',
+                code: "var wxy_null = null;\nconsole.log(typeof wxy_null); // object",
+                value: "wxy_null = " + wxy_null + " | typeof = " + (typeof wxy_null),
+                typeofVal: "object"
+            },
+            {
+                name: "Symbol",
+                cnName: "符号型",
+                category: "es6",
+                color: "#8b5cf6",
+                icon: "★",
+                desc: "ES6新增，表示唯一的、不可变的值，常用作对象属性键以避免冲突。",
+                code: 'var wxy_sym1 = Symbol("id");\nvar wxy_sym2 = Symbol("id");\nconsole.log(wxy_sym1 === wxy_sym2); // false',
+                value: "wxy_sym = " + wxy_sym.toString() + " | 唯一性验证: " + (wxy_sym === Symbol("wxy_id")),
+                typeofVal: "symbol"
+            }
+        ];
+
+        // ========== 渲染卡片 ==========
+        function wxy_renderCards(wxy_filter) {
+            var wxy_container = document.getElementById("wxy_content");
+            wxy_container.innerHTML = "";
+
+            var wxy_filtered = wxy_filter === "all"
+                ? wxy_typeList
+                : wxy_typeList.filter(function(wxy_t) { return wxy_t.category === wxy_filter; });
+
+            for (var i = 0; i < wxy_filtered.length; i++) {
+                var wxy_item = wxy_filtered[i];
+                var wxy_card = document.createElement("div");
+                wxy_card.className = "wxy_type_card";
+                wxy_card.style.setProperty("--wxy_card_color", wxy_item.color);
+                wxy_card.innerHTML =
+                    '<div class="wxy_card_header">' +
+                        '<div class="wxy_type_info">' +
+                            '<div class="wxy_type_icon">' + wxy_item.icon + '</div>' +
+                            '<div>' +
+                                '<div class="wxy_type_name">' + wxy_item.name + '</div>' +
+                                '<div class="wxy_type_cn">' + wxy_item.cnName + '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<span class="wxy_type_badge">typeof → ' + wxy_item.typeofVal + '</span>' +
+                    '</div>' +
+                    '<div class="wxy_type_desc">' + wxy_item.desc + '</div>' +
+                    '<div class="wxy_demo_box">' + wxy_item.code + '</div>' +
+                    '<div class="wxy_output"><span class="iconfont icon-dianzan"></span><strong>运行结果：</strong>' + wxy_item.value + '</div>';
+                wxy_container.appendChild(wxy_card);
+            }
+        }
+        wxy_renderCards("all");
+
+        // ========== 筛选 ==========
+        function wxy_filterType(wxy_type) {
+            var wxy_tabs = document.querySelectorAll(".wxy_tab");
+            for (var i = 0; i < wxy_tabs.length; i++) {
+                wxy_tabs[i].classList.remove("wxy_active");
+            }
+            event.target.classList.add("wxy_active");
+            wxy_renderCards(wxy_type);
+        }
+
+        // ========== Console 渲染 ==========
+        var wxy_consoleData = [
+            { key: "1. Number", val: wxy_num, typeof: typeof wxy_num },
+            { key: "2. String", val: wxy_str, typeof: typeof wxy_str },
+            { key: "3. Boolean", val: wxy_bool, typeof: typeof wxy_bool },
+            { key: "4. Undefined", val: wxy_undef, typeof: typeof wxy_undef },
+            { key: "5. Null", val: wxy_null, typeof: typeof wxy_null },
+            { key: "6. Symbol", val: wxy_sym.toString(), typeof: typeof wxy_sym }
+        ];
+        var wxy_consoleBody = document.getElementById("wxy_console_body");
+        for (var i = 0; i < wxy_consoleData.length; i++) {
+            var wxy_d = wxy_consoleData[i];
+            var wxy_line = document.createElement("div");
+            wxy_line.className = "wxy_console_line";
+            wxy_line.innerHTML =
+                '<span class="wxy_console_arrow">→</span>' +
+                '<span class="wxy_console_key">' + wxy_d.key + ':</span>' +
+                '<span class="wxy_console_val">' + wxy_d.val + '</span>' +
+                '<span class="wxy_console_typeof">| typeof: ' + wxy_d.typeof + '</span>';
+            wxy_consoleBody.appendChild(wxy_line);
+        }
+
+        // ========== 控制台输出 ==========
+        console.log("%c=== 王欣怡的JS数据类型验证 ===", "color:#6366f1;font-size:16px;font-weight:bold;");
+        console.log("1. Number:", wxy_num, "| typeof:", typeof wxy_num);
+        console.log("2. String:", wxy_str, "| typeof:", typeof wxy_str);
+        console.log("3. Boolean:", wxy_bool, "| typeof:", typeof wxy_bool);
+        console.log("4. Undefined:", wxy_undef, "| typeof:", typeof wxy_undef);
+        console.log("5. Null:", wxy_null, "| typeof:", typeof wxy_null);
+        console.log("6. Symbol:", wxy_sym.toString(), "| typeof:", typeof wxy_sym);
+    </script>
+</body>
+</html>

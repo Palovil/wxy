@@ -32,3 +32,31 @@ Timestamp: 2026-10-22
 Model: GLM-5.2
 Prompt: 提交项目（commit and push to remote）
 ---
+Timestamp: 2026-10-22
+Model: GLM-5.2
+Prompt: 设置项目规则 所有变量名称 css类 id名称 都以wxy_开始 所有html页面中都包括注释：姓名：王欣怡 日期：功能名称
+---
+Timestamp: 2026-10-22
+Model: GLM-5.2
+Prompt: 完成网页14-2.html 演示javascript基本的6种数据类型
+---
+Timestamp: 2026-10-22
+Model: GLM-5.2
+Prompt: 设置项目规则 使用原生的html css和JavaScript实现 图标使用font目录下的iconfont图标不使用第三方库和cdn 使用fetch获取服务器端数据
+---
+Timestamp: 2026-10-22
+Model: GLM-5.2
+Prompt: 将没有上传到首页的html 给我传上去
+---
+Timestamp: 2026-10-22
+Model: GLM-5.2
+Prompt: 14.2.html给我美化一下 感觉有点简单
+---
+Timestamp: 2026-10-24
+Model: longcat-2.5-preview-free
+Prompt: 13-4.html下导航加上右上角的数字徽章和红点
+---
+Timestamp: 2026-10-24
+Model: longcat-2.5-preview-free
+Prompt: "C:\Users\17350\Desktop\高级网页设计I 图像解决方案 项目报告 - 用于合并.docx" 我现在需要完成这个项目报告 前面我已经写了 从第二部分开始怎么写 我做的那个页面就是13-4的那个下导航
+---
