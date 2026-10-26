@@ -14,5 +14,5 @@ Static HTML/CSS/JS coursework for "Advanced Web Design". No build, no bundler, n
 ## Conventions
 
 - All CSS class names, ID names, and JS variables must start with `wxy_`.
-- Every HTML page must include a header comment with: 姓名：王欣怡 / 日期：<YYYY-MM-DD> / 功能名称：<brief description>.
+- Every newly created HTML file must include a header comment with: 姓名：王欣怡 / 建立时间：<YYYY-MM-DD> / 使用的大模型：<model name> / 功能名称：<brief description>.
 - Before executing any user request, append the prompt details (timestamp, model, prompt content) to `wang_prompt.md`. Never overwrite existing content.

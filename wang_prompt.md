@@ -60,3 +60,51 @@ Timestamp: 2026-10-24
 Model: longcat-2.5-preview-free
 Prompt: "C:\Users\17350\Desktop\高级网页设计I 图像解决方案 项目报告 - 用于合并.docx" 我现在需要完成这个项目报告 前面我已经写了 从第二部分开始怎么写 我做的那个页面就是13-4的那个下导航
 ---
+Timestamp: 2026-10-24
+Model: longcat-2.5-preview-free
+Prompt: 图5 gitee截图是得先提交这个项目吧 帮我提交
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: "C:\Users\17350\Desktop\高级网页设计I 实验指导书 网页元素设计.docx""C:\Users\17350\Desktop\高级网页设计I  网页元素设计 项目报告.doc" 我现在要做这个 按照指导书文件 我的选题是猫眼 我该怎么做 原图我应该截图猫眼的哪部分
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: [三张企业微信截图] 这三张原图行吗 满足指导书要求吗 下导航就不用了 那是我别的作业的
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: [Image 1] 这个吗 行吗 替换第三张
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: 行 那你帮我存吧 开始按照实验要求做吧
+---
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: What did we do so far?
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: Continue if you have next steps, or stop and ask for clarification if you are unsure how to proceed.
+---
+Timestamp: 2026-10-26
+Model: GLM-5.3-Flash
+Prompt: 编写15-1.html 一百个盒子 里面有数字 按照数7的规则 （7的倍数 个位数为7的数字等）不满足要求的显示数字 满足要求的显示空盒子
+---
+Timestamp: 2026-10-26
+Model: GLM-5.3-Flash
+Prompt: 修改规则agents.md 在新建一个html文件时 都要加入注释 注释包括：王欣怡 建立时间 使用的大模型 功能名称
+---
+Timestamp: 2026-10-26
+Model: opencode/big-pickle
+Prompt: 行 前者吧
+---
+Timestamp: 2026-10-26
+Model: GLM-5.3-Flash
+Prompt: 创建技能skill：提交到github commit和push整个项目到`https://github.com/Palovil/wxy.git`
+---
+Timestamp: 2026-10-26
+Model: GLM-5.3-Flash
+Prompt: 提交项目到github
