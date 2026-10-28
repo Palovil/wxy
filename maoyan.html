@@ -26,6 +26,7 @@
 
         body {
             min-height: 100vh;
+            overflow-x: hidden;
             background: #f4f1ec;
             color: #1d1d22;
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
@@ -215,220 +216,293 @@
             text-align: right;
         }
 
-        .wxy_stage {
-            padding: 34px;
-            border-radius: 26px;
-            background: linear-gradient(135deg, #f7f5f0, #e9e4dc);
-        }
-
-        .wxy_stage-card,
-        .wxy_stage-list {
+        .wxy_artboard-wrap {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            width: 100%;
+            overflow: hidden;
         }
 
-        .wxy_stage-detail {
-            padding: 24px;
-            background: #e9e4dc;
+        .wxy_artboard-wrap-detail {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+        }
+
+        .wxy_artboard {
+            position: relative;
+            flex: 0 0 auto;
+            overflow: hidden;
+            background: #ffffff;
+            transform-origin: top left;
+        }
+
+        .wxy_artboard-scaler {
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .wxy_artboard-card {
+            width: 304px;
+            height: 435px;
+        }
+
+        .wxy_artboard-rank {
+            width: 636px;
+            height: 505px;
+        }
+
+        .wxy_artboard-detail {
+            width: 1218px;
+            height: 586px;
         }
 
         .wxy_movie-card {
-            flex: 0 0 304px;
-            width: 304px;
+            position: absolute;
+            top: 20px;
+            left: 41px;
+            width: 242px;
+            height: 391px;
             overflow: hidden;
-            border-radius: 16px;
-            background: #141414;
-            box-shadow: 0 24px 46px rgba(23, 20, 17, 0.22);
+            border: 1px solid #efefef;
+            border-radius: 0;
+            background: #ffffff;
+            box-shadow: none;
         }
 
         .wxy_card-poster {
-            height: 300px;
+            position: relative;
+            width: 240px;
+            height: 330px;
+            overflow: hidden;
+            background: #232523;
         }
 
         .wxy_card-poster img {
-            width: 100%;
-            height: 100%;
+            display: block;
+            width: 240px;
+            height: 285px;
             object-fit: cover;
         }
 
-        .wxy_card-body {
-            padding: 14px 16px 34px;
-        }
-
-        .wxy_card-heading {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 10px;
+        .wxy_card-poster::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 65px;
+            background: linear-gradient(180deg, rgba(35, 37, 35, 0) 0%, #232523 48%);
         }
 
         .wxy_card-title {
+            position: absolute;
+            bottom: 16px;
+            left: 19px;
+            z-index: 2;
             overflow: hidden;
             color: #ffffff;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: 0.01em;
+            letter-spacing: 0;
+            line-height: 1;
             white-space: nowrap;
-            text-overflow: ellipsis;
         }
 
         .wxy_card-score {
-            flex: 0 0 auto;
+            position: absolute;
+            right: 8px;
+            bottom: 19px;
+            z-index: 2;
             color: #ffb400;
-            font-size: 19px;
+            font-size: 23px;
             font-weight: 800;
             font-variant-numeric: tabular-nums;
+            line-height: 1;
         }
 
         .wxy_card-score em {
             margin-left: 1px;
-            font-size: 10px;
+            font-size: 11px;
             font-style: normal;
             font-weight: 500;
         }
 
+        .wxy_card-body {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 59px;
+            background: #ffffff;
+        }
+
         .wxy_card-buy {
-            display: block;
-            width: 120px;
-            margin: 16px auto 0;
-            padding: 9px 0;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 59px;
+            margin: 0;
+            padding: 0;
             border: 0;
-            border-radius: 999px;
-            background: #f03d37;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            border-radius: 0;
+            background: transparent;
+            color: #ef4238;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 6px;
+            line-height: 59px;
+            text-align: center;
         }
 
         .wxy_card-buy:hover {
-            background: #d9342e;
-        }
-
-        .wxy_rank-card {
-            width: min(100%, 636px);
-            padding: 26px 66px 19px 31px;
-            border-radius: 20px;
-            background: #ffffff;
-            box-shadow: 0 22px 50px rgba(30, 26, 22, 0.12);
-        }
-
-        .wxy_rank-list {
-            margin: 0;
+            color: #d9342e;
         }
 
         .wxy_rank-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 17px;
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            width: 540px;
+            height: 118px;
+            border: 1px solid #efefef;
         }
 
         .wxy_rank-feature-poster {
-            flex: 0 0 180px;
+            position: absolute;
+            top: 1px;
+            left: 1px;
             width: 180px;
             height: 117px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 0;
         }
 
-        .wxy_rank-feature-info {
-            min-width: 0;
-            padding-top: 24px;
+        .wxy_rank-feature-trophy {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            z-index: 3;
+            width: 30px;
+            height: 30px;
+            background: #ef4238;
+            color: #ffd23f;
+            font-size: 16px;
+            line-height: 30px;
+            text-align: center;
         }
 
         .wxy_rank-feature-title {
-            color: #25242a;
-            font-size: 22px;
+            position: absolute;
+            top: 28px;
+            left: 196px;
+            color: #333333;
+            font-size: 27px;
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1;
             white-space: nowrap;
         }
 
         .wxy_rank-feature-count {
-            margin-top: 25px;
-            color: #f03d37;
-            font-size: 16px;
+            position: absolute;
+            top: 82px;
+            left: 197px;
+            margin: 0;
+            color: #ef4238;
+            font-size: 22px;
             font-weight: 700;
             font-variant-numeric: tabular-nums;
+            line-height: 1;
         }
 
         .wxy_rank-feature-count em {
-            margin-left: 2px;
-            color: #a29d95;
-            font-size: 11px;
+            margin-left: 1px;
+            color: #ef4238;
+            font-size: 22px;
             font-style: normal;
-            font-weight: 500;
+            font-weight: 400;
+        }
+
+        .wxy_rank-list {
+            position: absolute;
+            top: 161px;
+            left: 30px;
+            width: 540px;
+            margin: 0;
         }
 
         .wxy_rank-item {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 24px 0 28px;
-            border-bottom: 1px solid #f4f3f0;
-        }
-
-        .wxy_rank-item:last-child {
-            border-bottom: 0;
+            height: 82.5px;
+            padding: 0;
+            border: 0;
         }
 
         .wxy_rank-num {
             flex: 0 0 20px;
-            color: #b7b2aa;
-            font-size: 18px;
-            font-weight: 800;
+            color: #999999;
+            font-size: 22px;
+            font-weight: 700;
             font-variant-numeric: tabular-nums;
+            line-height: 1;
         }
 
-        .wxy_rank-item:nth-child(-n+4) .wxy_rank-num {
-            color: #f03d37;
+        .wxy_rank-item:nth-child(-n+2) .wxy_rank-num {
+            color: #ef4238;
         }
 
         .wxy_rank-name {
             flex: 1;
             min-width: 0;
             overflow: hidden;
-            color: #25242a;
-            font-size: 18px;
-            font-weight: 600;
+            color: #333333;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
 
         .wxy_rank-count {
             flex: 0 0 auto;
-            color: #f03d37;
-            font-size: 18px;
-            font-weight: 700;
+            color: #ef4238;
+            font-size: 22px;
+            font-weight: 600;
             font-variant-numeric: tabular-nums;
+            line-height: 1;
         }
 
         .wxy_rank-count em {
-            margin-left: 2px;
-            color: #a29d95;
-            font-size: 11px;
+            margin-left: 1px;
+            color: #ef4238;
+            font-size: 22px;
             font-style: normal;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .wxy_detail {
             position: relative;
+            width: 1218px;
+            height: 536px;
             overflow: hidden;
-            border-radius: 28px;
-            background: #100e14;
+            border-radius: 0;
+            background: linear-gradient(115deg, #3a2d57 0%, #4a356f 45%, #6a488f 100%);
             color: #ffffff;
-            box-shadow: 0 30px 60px rgba(20, 18, 16, 0.22);
+            box-shadow: 0 7px 18px rgba(25, 17, 35, 0.18);
         }
 
         .wxy_detail::before {
             content: "";
             position: absolute;
-            inset: -50px;
+            inset: -55px;
             background: url("img/maoyan-poster-3.png") center / cover no-repeat;
-            filter: blur(40px) saturate(1.1);
-            opacity: 0.42;
+            filter: blur(34px) saturate(1.4) brightness(1.15) hue-rotate(285deg);
+            opacity: 0.4;
+            mix-blend-mode: screen;
             transform: scale(1.12);
         }
 
@@ -436,153 +510,220 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(105deg, rgba(8, 7, 11, 0.97) 0%, rgba(8, 7, 11, 0.86) 46%, rgba(25, 10, 18, 0.78) 100%);
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(18, 8, 38, 0.22) 55%, rgba(12, 6, 28, 0.42) 100%);
         }
 
-        .wxy_detail-main {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 34px;
-            padding: 40px;
+        .wxy_detail-poster-frame {
+            position: absolute;
+            top: 50px;
+            left: 49px;
+            z-index: 2;
+            width: 360px;
+            height: 486px;
+            overflow: hidden;
+            background: #ffffff;
         }
 
-        .wxy_detail-poster {
-            flex: 0 0 300px;
-        }
-
-        .wxy_detail-poster img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+        .wxy_detail-poster-frame img {
+            position: absolute;
+            top: 4px;
+            left: 6px;
+            display: block;
+            width: 352px;
+            height: 482px;
+            object-fit: cover;
         }
 
         .wxy_detail-info {
-            flex: 1;
-            min-width: 0;
-            align-self: flex-start;
+            position: absolute;
+            top: 0;
+            left: 454px;
+            z-index: 2;
+            width: 375px;
+            height: 536px;
         }
 
         .wxy_detail-title {
-            margin-top: 12px;
-            font-size: clamp(2rem, 3.2vw, 2.6rem);
+            position: absolute;
+            top: 54px;
+            left: 0;
+            margin: 0;
+            font-size: 40px;
             font-weight: 700;
-            letter-spacing: 0.02em;
-            line-height: 1.05;
+            letter-spacing: 0;
+            line-height: 1;
         }
 
         .wxy_detail-en {
-            margin-top: 6px;
-            color: #a6a2ad;
-            font-size: 14px;
-            letter-spacing: 0.08em;
+            position: absolute;
+            top: 102px;
+            left: 0;
+            margin: 0;
+            color: #ffffff;
+            font-size: 26px;
+            letter-spacing: 0.02em;
+            line-height: 1;
         }
 
         .wxy_detail-tags {
-            margin-top: 16px;
-            color: #d7d4dc;
-            font-size: 12px;
-            letter-spacing: 0.04em;
+            position: absolute;
+            top: 154px;
+            left: 0;
+            margin: 0;
+            color: #d4d1da;
+            font-size: 20px;
+            letter-spacing: 0;
+            line-height: 1;
         }
 
         .wxy_detail-meta {
-            margin-top: 10px;
-            color: #c3bfc8;
-            font-size: 12px;
-            letter-spacing: 0.03em;
+            position: absolute;
+            left: 0;
+            margin: 0;
+            color: #c8c4ce;
+            font-size: 20px;
+            letter-spacing: 0;
+            line-height: 1;
         }
 
-        .wxy_detail-meta + .wxy_detail-meta {
-            margin-top: 3px;
+        .wxy_detail-meta-country {
+            top: 192px;
+        }
+
+        .wxy_detail-meta-release {
+            top: 233px;
         }
 
         .wxy_detail-actions {
+            position: absolute;
+            top: 354px;
+            left: 0;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 22px;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
         }
 
         .wxy_detail-btn {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            padding: 9px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.28);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
+            gap: 10px;
+            padding: 12px 22px;
+            border: 0;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.16);
             color: #ffffff;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .wxy_detail-btn:hover {
-            background: rgba(255, 255, 255, 0.14);
-        }
-
-        .wxy_detail-btn .iconfont {
-            color: #ffb400;
-            font-size: 15px;
-        }
-
-        .wxy_detail-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 20px;
-            color: #ffb400;
-            font-size: 12px;
-            letter-spacing: 0.04em;
-        }
-
-        .wxy_detail-more span {
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 400;
             line-height: 1;
         }
 
+        .wxy_detail-btn:hover {
+            background: rgba(255, 255, 255, 0.26);
+        }
+
+        .wxy_detail-btn .iconfont {
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        .wxy_detail-cta {
+            position: absolute;
+            top: 408px;
+            left: 0;
+            width: 375px;
+            height: 52px;
+            padding: 0;
+            border: 0;
+            border-radius: 5px;
+            background: #df2d2d;
+            color: #ffffff;
+            font-size: 23px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            line-height: 52px;
+            text-align: center;
+        }
+
+        .wxy_detail-cta:hover {
+            background: #c92727;
+        }
+
         .wxy_detail-data {
-            display: flex;
-            flex: 0 0 210px;
-            flex-direction: column;
-            gap: 24px;
-            align-self: flex-end;
-            margin-bottom: 18px;
-            padding-left: 28px;
-            border-left: 1px solid rgba(255, 255, 255, 0.14);
+            position: absolute;
+            top: 0;
+            left: 919px;
+            z-index: 2;
+            width: 200px;
+            height: 536px;
         }
 
         .wxy_detail-stat-label {
-            color: #a9a5b0;
-            font-size: 10px;
-            letter-spacing: 0.14em;
+            position: absolute;
+            left: 0;
+            margin: 0;
+            color: #b5b1bc;
+            font-size: 17px;
+            letter-spacing: 0;
+            line-height: 1;
         }
 
         .wxy_detail-stat-value {
-            margin-top: 4px;
+            position: absolute;
+            left: 2px;
+            margin: 0;
             color: #ffffff;
-            font-size: 34px;
+            font-size: 38px;
             font-weight: 800;
             font-variant-numeric: tabular-nums;
-            line-height: 1.1;
+            line-height: 1;
         }
 
         .wxy_detail-stat-value span {
             margin-left: 2px;
-            color: #c3bfc8;
-            font-size: 13px;
-            font-weight: 500;
+            color: #d0ccd5;
+            font-size: 19px;
+            font-weight: 400;
         }
 
         .wxy_detail-stat-score {
             color: #ffb400;
         }
 
+        .wxy_detail-stars {
+            position: absolute;
+            top: 322px;
+            left: 95px;
+            color: #ffb400;
+            font-size: 20px;
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+
         .wxy_detail-stat-note {
-            margin-top: 2px;
-            color: #8f8b96;
-            font-size: 10px;
+            position: absolute;
+            top: 352px;
+            left: 90px;
+            margin: 0;
+            color: #aaa6b2;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .wxy_detail-label-score {
+            top: 286px;
+        }
+
+        .wxy_detail-value-score {
+            top: 318px;
+        }
+
+        .wxy_detail-label-box {
+            top: 388px;
+        }
+
+        .wxy_detail-value-box {
+            top: 428px;
         }
 
         .wxy_page-footer {
@@ -596,50 +737,6 @@
             display: flex;
             justify-content: space-between;
             gap: 16px;
-        }
-
-        @media (max-width: 1024px) {
-            .wxy_detail-main {
-                gap: 26px;
-                padding: 32px;
-            }
-
-            .wxy_detail-poster {
-                flex-basis: 250px;
-            }
-
-            .wxy_detail-data {
-                flex-basis: 190px;
-                padding-left: 22px;
-            }
-
-            .wxy_detail-title {
-                font-size: 2.6rem;
-            }
-        }
-
-        @media (max-width: 860px) {
-            .wxy_detail-main {
-                flex-wrap: wrap;
-                align-items: flex-start;
-            }
-
-            .wxy_detail-info {
-                flex: 1 1 300px;
-            }
-
-            .wxy_detail-data {
-                flex: 1 1 100%;
-                flex-direction: row;
-                gap: 18px;
-                padding: 20px 0 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.14);
-                border-left: 0;
-            }
-
-            .wxy_detail-stat {
-                flex: 1;
-            }
         }
 
         @media (max-width: 760px) {
@@ -676,46 +773,6 @@
             .wxy_section-note {
                 text-align: left;
             }
-
-            .wxy_stage {
-                padding: 20px;
-                border-radius: 20px;
-            }
-
-            .wxy_stage-detail {
-                padding: 14px;
-            }
-
-            .wxy_detail {
-                border-radius: 20px;
-            }
-
-            .wxy_detail-main {
-                gap: 20px;
-                padding: 24px;
-            }
-
-            .wxy_detail-poster {
-                flex-basis: 180px;
-            }
-
-            .wxy_detail-title {
-                font-size: 2.4rem;
-            }
-
-            .wxy_detail-data {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .wxy_detail-stat + .wxy_detail-stat {
-                padding-top: 16px;
-                border-top: 1px solid rgba(255, 255, 255, 0.12);
-            }
-
-            .wxy_rank-card {
-                padding: 22px 20px 10px;
-            }
         }
 
         @media (max-width: 520px) {
@@ -734,116 +791,6 @@
 
             .wxy_section-title {
                 font-size: 1.4rem;
-            }
-
-            .wxy_stage {
-                padding: 16px;
-            }
-
-            .wxy_stage-detail {
-                padding: 8px;
-            }
-
-            .wxy_movie-card {
-                flex-basis: 220px;
-                width: 220px;
-            }
-
-            .wxy_card-poster {
-                height: 250px;
-            }
-
-            .wxy_card-title {
-                font-size: 16px;
-            }
-
-            .wxy_card-score {
-                font-size: 17px;
-            }
-
-            .wxy_card-body {
-                padding: 12px 13px 14px;
-            }
-
-            .wxy_card-buy {
-                width: 110px;
-                margin-top: 12px;
-                padding: 8px 0;
-                font-size: 12px;
-            }
-
-            .wxy_detail-main {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px;
-            }
-
-            .wxy_detail-poster {
-                flex-basis: auto;
-                width: 160px;
-            }
-
-            .wxy_detail-info {
-                width: 100%;
-            }
-
-            .wxy_detail-title {
-                font-size: 2rem;
-            }
-
-            .wxy_detail-en {
-                font-size: 12px;
-            }
-
-            .wxy_detail-btn {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-
-            .wxy_rank-card {
-                padding: 16px 18px 10px;
-            }
-
-            .wxy_rank-feature {
-                gap: 12px;
-                margin-bottom: 8px;
-            }
-
-            .wxy_rank-feature-poster {
-                flex-basis: 120px;
-                width: 120px;
-                height: 78px;
-            }
-
-            .wxy_rank-feature-info {
-                padding-top: 8px;
-            }
-
-            .wxy_rank-feature-title {
-                font-size: 18px;
-            }
-
-            .wxy_rank-feature-count {
-                margin-top: 8px;
-                font-size: 14px;
-            }
-
-            .wxy_rank-item {
-                gap: 10px;
-                padding: 14px 0 16px;
-            }
-
-            .wxy_rank-num {
-                flex-basis: 16px;
-                font-size: 14px;
-            }
-
-            .wxy_rank-name {
-                font-size: 14px;
-            }
-
-            .wxy_rank-count {
-                font-size: 14px;
             }
 
             .wxy_footer-inner {
@@ -880,19 +827,21 @@
                 </div>
                 <p class="wxy_section-note">海报在上，片名、评分和购票按钮在下。</p>
             </div>
-            <div class="wxy_stage wxy_stage-card">
-                <article class="wxy_movie-card">
-                    <div class="wxy_card-poster">
-                        <img src="img/maoyan-poster-1.png" alt="《神探之痕迹》电影海报">
-                    </div>
-                    <div class="wxy_card-body">
-                        <div class="wxy_card-heading">
+            <div class="wxy_artboard-wrap wxy_artboard-wrap-card">
+                <div class="wxy_artboard-scaler">
+                <div class="wxy_artboard wxy_artboard-card">
+                    <article class="wxy_movie-card">
+                        <div class="wxy_card-poster">
+                            <img src="img/maoyan-card-poster.png" alt="《神探之痕迹》电影海报">
                             <h3 class="wxy_card-title">神探之痕迹</h3>
                             <span class="wxy_card-score">9.6<em>分</em></span>
                         </div>
-                        <button class="wxy_card-buy" type="button">购票</button>
-                    </div>
-                </article>
+                        <div class="wxy_card-body">
+                            <button class="wxy_card-buy" type="button">购票</button>
+                        </div>
+                    </article>
+                </div>
+                </div>
             </div>
         </section>
 
@@ -904,16 +853,16 @@
                 </div>
                 <p class="wxy_section-note">首行保留原图中的横版海报，其余名次、片名和想看人数横向排列。</p>
             </div>
-            <div class="wxy_stage wxy_stage-list">
-                <div class="wxy_rank-card">
+            <div class="wxy_artboard-wrap wxy_artboard-wrap-rank">
+                <div class="wxy_artboard-scaler">
+                <div class="wxy_artboard wxy_artboard-rank">
+                    <div class="wxy_rank-feature">
+                        <img class="wxy_rank-feature-poster" src="img/maoyan-rank-poster.png" alt="《神探之痕迹》横版海报">
+                        <span class="wxy_rank-feature-trophy" aria-hidden="true">🏆</span>
+                        <h3 class="wxy_rank-feature-title">神探之痕迹</h3>
+                        <p class="wxy_rank-feature-count">76.04<em>万</em></p>
+                    </div>
                     <ol class="wxy_rank-list">
-                        <li class="wxy_rank-feature">
-                            <img class="wxy_rank-feature-poster" src="img/maoyan-poster-1.png" alt="《神探之痕迹》横版海报">
-                            <div class="wxy_rank-feature-info">
-                                <h3 class="wxy_rank-feature-title">神探之痕迹</h3>
-                                <p class="wxy_rank-feature-count">76.04<em>万</em></p>
-                            </div>
-                        </li>
                         <li class="wxy_rank-item">
                             <span class="wxy_rank-num">2</span>
                             <span class="wxy_rank-name">生化危机：爆发夜</span>
@@ -936,6 +885,7 @@
                         </li>
                     </ol>
                 </div>
+                </div>
             </div>
         </section>
 
@@ -947,37 +897,36 @@
                 </div>
                 <p class="wxy_section-note">左侧海报，中间影片信息，右侧口碑与票房数据。</p>
             </div>
-            <div class="wxy_stage wxy_stage-detail">
-                <article class="wxy_detail">
-                    <div class="wxy_detail-main">
-                        <div class="wxy_detail-poster">
+            <div class="wxy_artboard-wrap wxy_artboard-wrap-detail">
+                <div class="wxy_artboard-scaler">
+                <div class="wxy_artboard wxy_artboard-detail">
+                    <article class="wxy_detail">
+                        <div class="wxy_detail-poster-frame">
                             <img src="img/maoyan-poster-3.png" alt="《奥德赛》电影海报">
                         </div>
                         <div class="wxy_detail-info">
                             <h3 class="wxy_detail-title">奥德赛</h3>
                             <p class="wxy_detail-en">The Odyssey</p>
-                            <p class="wxy_detail-tags">[动作 历史 冒险 奇幻]</p>
-                            <p class="wxy_detail-meta">美国 · 172分钟</p>
-                            <p class="wxy_detail-meta">2026.08.14 09:00 中国大陆上映</p>
+                            <p class="wxy_detail-tags">动作 历史 冒险 奇幻</p>
+                            <p class="wxy_detail-meta wxy_detail-meta-country">美国 / 172分钟</p>
+                            <p class="wxy_detail-meta wxy_detail-meta-release">2026-08-14 09:00中国大陆上映</p>
                             <div class="wxy_detail-actions">
                                 <button class="wxy_detail-btn" type="button"><i class="iconfont icon-shoucang" aria-hidden="true"></i>想看</button>
                                 <button class="wxy_detail-btn" type="button"><i class="iconfont icon-bianji" aria-hidden="true"></i>评分</button>
                             </div>
-                            <a class="wxy_detail-more" href="#">查看更多电影详情<span>›</span></a>
+                            <button class="wxy_detail-cta" type="button">查看更多电影详情</button>
                         </div>
                         <aside class="wxy_detail-data">
-                            <div class="wxy_detail-stat">
-                                <p class="wxy_detail-stat-label">猫眼口碑</p>
-                                <p class="wxy_detail-stat-value wxy_detail-stat-score">9.4</p>
-                                <p class="wxy_detail-stat-note">80579人评分</p>
-                            </div>
-                            <div class="wxy_detail-stat">
-                                <p class="wxy_detail-stat-label">累计票房</p>
-                                <p class="wxy_detail-stat-value">7.77<span>亿</span></p>
-                            </div>
+                            <p class="wxy_detail-stat-label wxy_detail-label-score">猫眼口碑</p>
+                            <p class="wxy_detail-stat-value wxy_detail-stat-score wxy_detail-value-score">9.4</p>
+                            <span class="wxy_detail-stars" aria-hidden="true">★★★★★</span>
+                            <p class="wxy_detail-stat-note">80579人评分</p>
+                            <p class="wxy_detail-stat-label wxy_detail-label-box">累计票房</p>
+                            <p class="wxy_detail-stat-value wxy_detail-value-box">7.77<span>亿</span></p>
                         </aside>
-                    </div>
-                </article>
+                    </article>
+                </div>
+                </div>
             </div>
         </section>
     </main>
@@ -988,5 +937,27 @@
             <span>高级网页设计 I · 网页元素设计 · 原图素材仅用于课程作业</span>
         </div>
     </footer>
+
+    <script>
+        (function () {
+            function fit() {
+                document.querySelectorAll('.wxy_artboard-scaler').forEach(function (sc) {
+                    var art = sc.querySelector('.wxy_artboard');
+                    if (!art) return;
+                    var aw = art.offsetWidth;
+                    var ah = art.offsetHeight;
+                    var avail = sc.parentElement.clientWidth;
+                    var max = art.classList.contains('wxy_artboard-detail') ? 99 : 1;
+                    var s = Math.min(max, avail / aw);
+                    art.style.transform = 'scale(' + s + ')';
+                    sc.style.width = (aw * s) + 'px';
+                    sc.style.height = (ah * s) + 'px';
+                });
+            }
+            window.addEventListener('resize', fit);
+            window.addEventListener('load', fit);
+            fit();
+        })();
+    </script>
 </body>
 </html>
