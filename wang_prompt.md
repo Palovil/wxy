@@ -131,3 +131,15 @@ prompt: 上传到gitee的13-4 和maoyan.html 老师说要上传网页 不是单�
 [2026-10-29 13:17:52] model: opencode/big-pickle
 prompt: 那你帮我上传成老师说的那种网页吧
 ---
+[2026-10-29 14:20:00] model: GLM-5.3-Flash
+prompt: 完成16-1.html 展示JavaScript数组的主要方法 形象一些
+---
+[2026-10-29 14:35:00] model: GLM-5.3-Flash
+prompt: 完成16-2.html 展示JavaScript对象
+---
+[2026-10-29 14:50:00] model: GLM-5.3-Flash
+prompt: 完成16-3.html 使用的图标在font目录里选 完成的网页尽可能地和给定的图片相似（浏览周排行榜）
+---
+[2026-10-29 15:05:00] model: GLM-5.3-Flash
+prompt: 做16-4.html 根据我发给你的图片和内容（股票行情选项卡 沪深/沪跌/深涨/深跌）生成一模一样的 选项卡要能点 点完有对应的内容 剩下两个选项卡自己按相同风格编写
+---

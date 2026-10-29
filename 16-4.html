@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        姓名：王欣怡
+        建立时间：2026-10-29
+        使用的大模型：GLM-5.3-Flash
+        功能名称：股票行情选项卡（沪深/沪跌/深涨/深跌，点击切换对应数据）
+    -->
+    <title>股票行情选项卡</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --wxy_red: #e02f2f;
+            --wxy_green: #0aa356;
+            --wxy_rank: #a52a2a;
+            --wxy_text: #333333;
+            --wxy_line: #ececec;
+            --wxy_border: #cccccc;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "SimSun", sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 30px 16px;
+        }
+
+        /* ===== 选项卡组件 ===== */
+        .wxy_board {
+            width: 262px;
+            max-width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--wxy_border);
+            align-self: flex-start;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        /* 选项卡标题栏 */
+        .wxy_tabs { display: flex; border-bottom: 1px solid var(--wxy_border); }
+        .wxy_tab {
+            flex: 1;
+            padding: 8px 0;
+            text-align: center;
+            font-size: 13px;
+            color: var(--wxy_text);
+            background: #f7f7f7;
+            border-right: 1px solid var(--wxy_border);
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            transition: background 0.2s ease;
+        }
+        .wxy_tab:last-child { border-right: none; }
+        .wxy_tab:hover { background: #efefef; }
+        .wxy_tab.wxy_active {
+            background: #ffffff;
+            font-weight: 700;
+            box-shadow: inset 0 0 0 1px #999999;
+            z-index: 1;
+        }
+
+        /* 行情列表 */
+        .wxy_panel { padding: 2px 0; }
+        .wxy_row {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            font-size: 12px;
+            border-bottom: 1px solid var(--wxy_line);
+            cursor: default;
+            transition: background 0.15s ease;
+        }
+        .wxy_row:last-child { border-bottom: none; }
+        .wxy_row:hover { background: #f7fafd; }
+
+        .wxy_rank {
+            flex: 0 0 14px;
+            margin-right: 2px;
+            color: var(--wxy_rank);
+            font-weight: 700;
+        }
+        .wxy_name {
+            flex: 1;
+            color: var(--wxy_text);
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .wxy_price {
+            flex: 0 0 48px;
+            color: var(--wxy_text);
+        }
+        .wxy_change {
+            flex: 0 0 52px;
+            text-align: right;
+            font-weight: 700;
+        }
+        .wxy_pct {
+            flex: 0 0 62px;
+            text-align: right;
+            font-weight: 700;
+        }
+        .wxy_up   { color: var(--wxy_red); }
+        .wxy_down { color: var(--wxy_green); }
+
+        @media (max-width: 480px) {
+            body { padding: 14px 8px; }
+        }
+    </style>
+</head>
+<body>
+    <!--
+        姓名：王欣怡
+        建立时间：2026-10-29
+        功能名称：股票行情选项卡
+    -->
+    <div class="wxy_board">
+        <!-- 选项卡标题 -->
+        <div class="wxy_tabs" id="wxy_tabs">
+            <div class="wxy_tab wxy_active" data-tab="hs">沪深</div>
+            <div class="wxy_tab" data-tab="hd">沪跌</div>
+            <div class="wxy_tab" data-tab="sz">深涨</div>
+            <div class="wxy_tab" data-tab="sd">深跌</div>
+        </div>
+        <!-- 选项卡内容（由 JS 渲染） -->
+        <div class="wxy_panel" id="wxy_panel"></div>
+    </div>
+
+    <script>
+        // 姓名：王欣怡
+        // 建立时间：2026-10-29
+        // 功能名称：股票行情选项卡（点击切换数据）
+
+        // ===== 四个选项卡的数据 =====
+        var wxy_data = {
+            // 沪深（示例图1）
+            hs: [
+                { name: "斯菲能",   price: "8.86",  change: "+3.35", pct: "60.58%" },
+                { name: "天津松江", price: "8.16",  change: "+0.65", pct: "8.66%"  },
+                { name: "金瑞科技", price: "8.79",  change: "+0.42", pct: "5.02%"  },
+                { name: "宏发股份", price: "17.22", change: "+0.82", pct: "5.00%"  },
+                { name: "杭齿前进", price: "7.23",  change: "+0.34", pct: "4.93%"  }
+            ],
+            // 沪跌（自行编写，同风格）
+            hd: [
+                { name: "中远海发", price: "4.12",  change: "-0.21", pct: "-4.85%" },
+                { name: "华纺股份", price: "5.36",  change: "-0.27", pct: "-4.80%" },
+                { name: "大东方",   price: "6.41",  change: "-0.31", pct: "-4.61%" },
+                { name: "上海洗霸", price: "14.20", change: "-0.66", pct: "-4.45%" },
+                { name: "兰生股份", price: "9.87",  change: "-0.45", pct: "-4.36%" }
+            ],
+            // 深涨（示例图2）
+            sz: [
+                { name: "天顺风能", price: "10.52", change: "+0.96", pct: "10.04%" },
+                { name: "兴源过滤", price: "16.02", change: "+1.46", pct: "10.03%" },
+                { name: "北京君正", price: "36.92", change: "+3.36", pct: "10.01%" },
+                { name: "美盛文化", price: "32.87", change: "+2.99", pct: "10.01%" },
+                { name: "骅威股份", price: "15.16", change: "+1.38", pct: "10.01%" }
+            ],
+            // 深跌（自行编写，同风格）
+            sd: [
+                { name: "沙钢股份", price: "7.05",  change: "-0.35", pct: "-4.73%" },
+                { name: "中来股份", price: "8.92",  change: "-0.43", pct: "-4.60%" },
+                { name: "全新好",   price: "11.36", change: "-0.53", pct: "-4.46%" },
+                { name: "跨境通",   price: "5.68",  change: "-0.26", pct: "-4.38%" },
+                { name: "高乐股份", price: "4.41",  change: "-0.20", pct: "-4.34%" }
+            ]
+        };
+
+        var wxy_panel = document.getElementById("wxy_panel");
+        var wxy_tabEls = document.querySelectorAll(".wxy_tab");
+
+        // ===== 渲染指定选项卡的行情列表 =====
+        function wxy_render(wxy_key) {
+            var wxy_list = wxy_data[wxy_key] || [];
+            var wxy_html = "";
+            wxy_list.forEach(function (wxy_item, wxy_i) {
+                // 涨为红色，跌为绿色
+                var wxy_cls = wxy_item.change.charAt(0) === "-" ? "wxy_down" : "wxy_up";
+                wxy_html +=
+                    '<div class="wxy_row">' +
+                        '<span class="wxy_rank">' + (wxy_i + 1) + '.</span>' +
+                        '<span class="wxy_name">' + wxy_item.name + '</span>' +
+                        '<span class="wxy_price">' + wxy_item.price + '</span>' +
+                        '<span class="wxy_change ' + wxy_cls + '">' + wxy_item.change + '</span>' +
+                        '<span class="wxy_pct ' + wxy_cls + '">' + wxy_item.pct + '</span>' +
+                    '</div>';
+            });
+            wxy_panel.innerHTML = wxy_html;
+        }
+
+        // ===== 选项卡点击切换 =====
+        wxy_tabEls.forEach(function (wxy_tab) {
+            wxy_tab.addEventListener("click", function () {
+                wxy_tabEls.forEach(function (wxy_t) { wxy_t.classList.remove("wxy_active"); });
+                wxy_tab.classList.add("wxy_active");
+                wxy_render(wxy_tab.getAttribute("data-tab"));
+            });
+        });
+
+        // 默认渲染第一个选项卡
+        wxy_render("hs");
+
+        console.log("%c=== 王欣怡的股票行情选项卡 ===", "color:#a52a2a;font-size:14px;font-weight:bold;");
+        console.log("包含选项卡：" + Object.keys(wxy_data).join("、") + "，点击可切换");
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        姓名：王欣怡
+        建立时间：2026-10-29
+        使用的大模型：GLM-5.3-Flash
+        功能名称：浏览周排行榜（仿原图静态组件，数据由 JS 数组渲染）
+    -->
+    <title>浏览周排行榜</title>
+    <link rel="stylesheet" href="font/iconfont.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --wxy_header_bg: #274b6e;
+            --wxy_rank: #a52a2a;
+            --wxy_title: #333333;
+            --wxy_meta: #999999;
+            --wxy_line: #efefef;
+            --wxy_border: #e5e5e5;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 30px 16px;
+        }
+
+        /* ===== 排行榜卡片 ===== */
+        .wxy_board {
+            width: 420px;
+            max-width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--wxy_border);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            align-self: flex-start;
+        }
+        .wxy_board_header {
+            background: linear-gradient(135deg, #2a5178 0%, #1f3f60 100%);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 13px 16px;
+        }
+        .wxy_board_header .iconfont {
+            font-size: 18px;
+            margin-right: 6px;
+            vertical-align: -2px;
+        }
+
+        /* ===== 列表 ===== */
+        .wxy_list { list-style: none; }
+        .wxy_item {
+            padding: 12px 16px 12px 14px;
+            border-bottom: 1px solid var(--wxy_line);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .wxy_item:last-child { border-bottom: none; }
+        .wxy_item:hover { background: #f7fafd; }
+
+        .wxy_item_title {
+            display: flex;
+            align-items: baseline;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--wxy_title);
+            line-height: 1.5;
+        }
+        .wxy_rank {
+            flex: 0 0 24px;
+            color: var(--wxy_rank);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .wxy_item_name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .wxy_item_name:hover { color: #2a5178; }
+
+        .wxy_item_meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 7px;
+            padding-left: 24px;
+            font-size: 13px;
+            color: var(--wxy_meta);
+        }
+        .wxy_meta {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 16px;
+            white-space: nowrap;
+        }
+        .wxy_meta .iconfont {
+            font-size: 14px;
+            margin-right: 4px;
+            color: #b0b0b0;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 14px 8px; }
+            .wxy_meta { margin-right: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!--
+        姓名：王欣怡
+        建立时间：2026-10-29
+        功能名称：浏览周排行榜
+    -->
+    <div class="wxy_board">
+        <div class="wxy_board_header">
+            <span class="iconfont icon-shouye"></span>浏览周排行榜
+        </div>
+        <ul class="wxy_list" id="wxy_list">
+            <!-- 由 JavaScript 动态渲染 -->
+        </ul>
+    </div>
+
+    <script>
+        // 姓名：王欣怡
+        // 建立时间：2026-10-29
+        // 功能名称：浏览周排行榜（数据渲染）
+
+        // 排行榜数据（数组 + 对象）
+        var wxy_data = [
+            { title: "纽约大都会里复刻了座苏州网师园，中国网友坐不住了", date: "10-24", author: "路德维希维", views: 9582, comments: 35 },
+            { title: "越南论坛：越南游客蜂拥前往中国，边检忙不过来了", date: "10-27", author: "yuan2301",   views: 8613, comments: 89 },
+            { title: "贝森特下令全球银行取消与中国相关业务，理由牵强", date: "10-24", author: "Natsuo",      views: 8359, comments: 19 },
+            { title: "巴西人进中国“贫民窟”，给巴西网友整破防了",     date: "10-28", author: "青丘国的守",   views: 8104, comments: 23 },
+            { title: "DeepSeek 公布了 DeepInfer 这个新东西",          date: "10-24", author: "兰陵笑笑生",   views: 7925, comments: 35 },
+            { title: "公元前1250年的古代汉字——甲骨文是如何被破解的", date: "10-23", author: "昨日重新",     views: 7816, comments: 34 },
+            { title: "APP聊了个21岁中国男生，本人女18想见见网友",     date: "10-22", author: "爱无痕吗",     views: 7620, comments: 58 }
+        ];
+
+        // 渲染排行榜
+        var wxy_list = document.getElementById("wxy_list");
+        wxy_data.forEach(function (wxy_item, wxy_i) {
+            var wxy_li = document.createElement("li");
+            wxy_li.className = "wxy_item";
+            wxy_li.innerHTML =
+                '<div class="wxy_item_title">' +
+                    '<span class="wxy_rank">' + (wxy_i + 1) + '</span>' +
+                    '<span class="wxy_item_name" title="' + wxy_item.title + '">' + wxy_item.title + '</span>' +
+                '</div>' +
+                '<div class="wxy_item_meta">' +
+                    '<span class="wxy_meta"><span class="iconfont icon-faxian"></span>' + wxy_item.date + '</span>' +
+                    '<span class="wxy_meta"><span class="iconfont icon-my"></span>' + wxy_item.author + '</span>' +
+                    '<span class="wxy_meta"><span class="iconfont icon-sousuo_o"></span>' + wxy_item.views + '</span>' +
+                    '<span class="wxy_meta"><span class="iconfont icon-weixin"></span>' + wxy_item.comments + '</span>' +
+                '</div>';
+            wxy_list.appendChild(wxy_li);
+        });
+
+        console.log("%c=== 王欣怡的浏览周排行榜 ===", "color:#274b6e;font-size:14px;font-weight:bold;");
+        console.log("共渲染 " + wxy_data.length + " 条榜单数据");
+    </script>
+</body>
+</html>
